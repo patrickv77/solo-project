@@ -38,7 +38,7 @@ userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
 
   const userObj = await User.findOne({username});
-  if(!userObj) res.redirect('/signup');
+  if(!userObj || !password) res.redirect('/signup');
 
   const valid = await userObj.validatePassword(password);
   if(valid === false) {

@@ -6,11 +6,12 @@ const cookieParser = require('cookie-parser');
 const PORT = 3000;
 
 //routers
-const signupRouter = require('./routers/signup');
 const loginRouter = require('./routers/login');
+const signupRouter = require('./routers/signup');
 const appRouter = require('./routers/app');
 
 //controllers
+const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
 
 app.use(express.json());

@@ -5,10 +5,10 @@ const sessionController = {};
 //runs when everything loads, if session exists, go straight to tech stack page
 sessionController.isLoggedIn = async (req, res, next) => {
   try{
-    const currentSession = await Session.findOne({
-      cookieId: req.cookies.ssid,
-    });
-  
+    // const currentSession = await Session.findOne({
+    //   cookieId: req.cookies.ssid,
+    // });
+    const currentSession = false;
     if(currentSession){
       res.locals.loggedIn = true;
       next();
