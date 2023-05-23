@@ -4,22 +4,25 @@ const app = express();
 
 const PORT = 3000;
 
+const signupRouter = require('./routers/signup');
 
 app.use(express.json());
 app.use(express.urlencoded());
 
 //root, serve index html
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
-})
+});
 
-
+app.use('/signup', signupRouter);
 
 //catch all for non existant routes
-app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+app.use((_req, res) =>
+  res.status(404).send("This is not the page you're looking for...")
+);
 
 //default error handler
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
