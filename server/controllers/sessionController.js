@@ -13,7 +13,8 @@ sessionController.isLoggedIn = async (req, res, next) => {
       res.locals.loggedIn = true;
       next();
     } else {
-      res.redirect('/login');
+      res.locals.loggedIn = false;
+      next();
     }
   } catch(err) {
     next({
@@ -28,14 +29,29 @@ sessionController.isLoggedIn = async (req, res, next) => {
 sessionController.startSession = async (_req, res, next) => {
   //should only have one session at a time
   try {
-    await Session.delete({});
-    await Session.create({
+    await Session.deleteMany({});
+    const sesh = await Session.create({
       cookieId: res.locals.user.id,
     });
     return next();
   } catch (err) {
     next({
       log: 'sessionController.startSession error ' + err,
+      status: 400,
+      message: 'error! try again.'
+    });
+  }
+};
+
+//logout functionality
+sessionController.stopSession = async (_req, res, next) => {
+  //delete session, go next
+  try {
+    await Session.delete({});
+    return next();
+  } catch (err) {
+    next({
+      log: 'sessionController.stopSession error ' + err,
       status: 400,
       message: 'error! try again.'
     });

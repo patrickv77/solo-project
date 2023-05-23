@@ -28,14 +28,25 @@ userController.createUser = async (req, res, next) => {
   } else {
     //otherwise create a new user and pass it along
     const newUser = await User.create({username, password, firstName, lastName, techStack: []});
-    res.locals.newUser = newUser;
+    res.locals.user = newUser;
     return next();
   }
 }
 
 //login handler
 userController.verifyUser = async (req, res, next) => {
+  const { username, password } = req.body;
 
+  const userObj = await User.findOne({username});
+  if(!userObj) res.redirect('/signup');
+
+  const valid = await userObj.validatePassword(password);
+  if(valid === false) {
+    res.redirect('/login');
+  } else {
+    res.locals.user = userObj;
+    return next();
+  }
 }
 
 //delete users.. for testing etc

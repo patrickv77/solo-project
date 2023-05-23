@@ -5,18 +5,39 @@ const cookieParser = require('cookie-parser');
 
 const PORT = 3000;
 
+//routers
 const signupRouter = require('./routers/signup');
+const loginRouter = require('./routers/login');
+const appRouter = require('./routers/app');
+
+//controllers
+const sessionController = require('./controllers/sessionController');
 
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
 
 //root, serve index html
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/index.html'));
+app.get('/',
+  sessionController.isLoggedIn,
+  (_req, res) => {
+  if(res.locals.isLoggedIn){
+    //redirect to main page, 
+    res.sendStatus(200);
+  }else{
+    //login page
+    res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  }
 });
 
+//signup router
 app.use('/signup', signupRouter);
+
+//login router
+app.use('/login', loginRouter);
+
+//main page
+app.use('/app', appRouter);
 
 //catch all for non existant routes
 app.use((_req, res) =>
