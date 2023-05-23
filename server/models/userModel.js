@@ -22,5 +22,28 @@ const userSchema = new mongoose.Schema({
   techStack: { type: Array },
 })
 
+userSchema.pre('save', async function (next){
+  if (!this.isModified('password')) return next();
+  //async await method
+  try {
+    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+    this.password = await bcrypt.hash(this.password, salt);
+    return next();
+  } catch (err) {
+    next({
+      log: 'error in userSchema.pre' + err,
+      status: 400,
+      message: 'try again'
+    });
+  }
+});
+
+userSchema.methods.validatePassword = async function(pass) {
+  try {
+    return await bcrypt.compare(pass, this.password);
+  } catch (err) {
+    return err;
+  }
+};
 
 module.exports = mongoose.model('User', userSchema);

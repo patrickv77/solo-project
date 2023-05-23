@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 
 const PORT = 3000;
 
@@ -8,6 +9,7 @@ const signupRouter = require('./routers/signup');
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
 
 //root, serve index html
 app.get('/', (req, res) => {

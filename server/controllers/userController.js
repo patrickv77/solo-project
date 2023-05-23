@@ -33,6 +33,41 @@ userController.createUser = async (req, res, next) => {
   }
 }
 
+//login handler
+userController.verifyUser = async (req, res, next) => {
+
+}
+
+//delete users.. for testing etc
+userController.deleteUser = async (req, res, next) => {
+  const { username } = req.body;
+
+    try {
+      //query database for student
+      const deletedUser = await User.findOneAndDelete({ username });
+
+      //handle case where no such student exists
+      if (!deletedUser) {
+        return next({
+          log: 'no student data to delete with input name in userController.deleteUser',
+          status: 400,
+          message: `No username: ${username} in database`,
+        });
+      }
+
+      //send deleted data back on res locals
+      res.locals.deletedUser = deletedUser;
+      return next();
+    } catch (err) {
+      return next({
+        //if our async function (findOneAndDelete) errors out return this error
+        log: 'error invoking findOneAndDelete on database at userController.deleteUser',
+        status: 400,
+        message: 'server error, try again!',
+      });
+    }
+}
+
 
 
 
