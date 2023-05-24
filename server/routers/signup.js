@@ -6,9 +6,15 @@ const sessionController = require('../controllers/sessionController');
 
 const router = express.Router();
 
-router.get('/', (_req, res) =>
-  res.sendFile(path.resolve(__dirname, '../../client/signup.html'))  //TODO: CHANGE TO SIGNUP PAGE
-);
+router.get('/', sessionController.isLoggedIn, (_req, res) => {
+  if (res.locals.loggedIn) {
+    //redirect to main page,
+    res.sendStatus(200);
+  } else {
+    //login page
+    res.sendFile(path.resolve(__dirname, '../../client/signup.html'));
+  }
+});
 
 router.post(
   '/',

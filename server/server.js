@@ -13,23 +13,34 @@ const appRouter = require('./routers/app');
 //controllers
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const userController = require('./controllers/userController');
 
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
 
 //root, serve index html
+// app.get('/',
+//   sessionController.isLoggedIn,
+//   (_req, res) => {
+//   if(res.locals.isLoggedIn){
+//     //redirect to main page, 
+//     res.sendFile(path.resolve(__dirname, '../client/index.html'));
+//   }else{
+//     //login page
+//     res.sendFile(path.resolve(__dirname, '../client/login.html'));
+//   }
+// });
+
+//fake root that logs in and creates session cookie
 app.get('/',
-  sessionController.isLoggedIn,
-  (_req, res) => {
-  if(res.locals.isLoggedIn){
-    //redirect to main page, 
-    res.sendStatus(200);
-  }else{
-    //login page
+  userController.testUser,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/index.html'));
   }
-});
+);
 
 //signup router
 app.use('/signup', signupRouter);
@@ -39,6 +50,20 @@ app.use('/login', loginRouter);
 
 //main page
 app.use('/app', appRouter);
+
+//TEST ROUTES TO TEST MIDDLEWARE
+app.get('/test', 
+  userController.getStack,
+  (req, res) => {
+    res.status(200).send(res.locals.techArray);
+  }
+)
+app.post('/test', 
+  userController.addToStack,
+  (req, res) => {
+    res.sendStatus(200)
+  }
+)
 
 //catch all for non existant routes
 app.use((_req, res) =>
