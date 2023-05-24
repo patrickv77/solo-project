@@ -57,7 +57,7 @@ userController.verifyUser = async (req, res, next) => {
 
 //get stack and pass along thru res locals
 userController.getStack = async (req, res, next) => {
-  const userId = req.cookies.ssid;
+  const userId = '646d2c7d94ac2c9a3ded88a8'; //req.cookies.ssid;
 
   //because we'll be using our req.cookie to access users, we can guarantee that the user exists in our database
   //unless someone manually goes into my db and deletes it >.> pls dont.. icant
@@ -72,22 +72,27 @@ userController.getStack = async (req, res, next) => {
 
 //will be called after get stack, adds to the stack and updates the database
 userController.addToStack = async (req, res, next) => {
-  const userId = req.cookies.ssid;
+  const userId = '646d2c7d94ac2c9a3ded88a8'; //replace with req.cookies.ssid
   const { technologyToAdd } = req.body;
-  if(typeof technologyToAdd !== 'string'){
+  if (typeof technologyToAdd !== 'string') {
     next({
       log: 'addtostack error',
-      message: 'invalid type of input'
-    })
+      message: 'invalid type of input',
+    });
   }
 
-  const userObj = await User.findById(userId); 
 
-  const techArr = userObj.techStack;
-  techArr.push(technologyToAdd);
-  console.log(techArr);
+  await User.findByIdAndUpdate(userId, {
+    $push: { techStack: technologyToAdd },
+  });
+
+  // const userObj = await User.findById(userId);
+  // console.log(userObj.techStack);
+  // console.log(techArr);
   next();
 };
+
+//TODO: REMOVE TECHNOLOGY?
 
 //delete users.. for testing etc
 userController.deleteUser = async (req, res, next) => {

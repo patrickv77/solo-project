@@ -1,0 +1,5 @@
+{
+  "compilerOptions": {
+    "types": ["react/next", "react-dom/next"]
+  },
+}

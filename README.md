@@ -11,6 +11,6 @@ REACT TREE??
   |-- TechContainer
     |-- TechnologyCreator
       |-- LearningDisplay
-      |-- TechnologyDisplay
+      |--TechnologyDisplay
     |-- TechStackDisplay
     |-- AcornDisplay
