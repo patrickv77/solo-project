@@ -16,6 +16,13 @@ router.get('/', sessionController.isLoggedIn, (_req, res) => {
   }
 });
 
+router.get('/user',
+  userController.getUser,
+  (_req, res) => {
+    res.status(200).json(res.locals.user);
+  }
+);
+
 //handles adding techs to stack
 router.patch('/',
   (_req, res) => res.status(200).json({})

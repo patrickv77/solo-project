@@ -53,9 +53,9 @@ app.use('/app', appRouter);
 
 //TEST ROUTES TO TEST MIDDLEWARE
 app.get('/test', 
-  userController.getStack,
+  userController.getUser,
   (req, res) => {
-    res.status(200).send(res.locals.techArray);
+    res.status(200).send(res.locals.user);
   }
 )
 app.post('/test', 

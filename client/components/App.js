@@ -4,8 +4,7 @@ import TechContainer from '../containers/TechContainer';
 
 const App = () => {
   return (
-    <div>
-      <h1>react boilerplate</h1>
+    <div class='main'>
       <TitleDisplay />
       <TechContainer />
     </div>

@@ -56,17 +56,13 @@ userController.verifyUser = async (req, res, next) => {
 };
 
 //get stack and pass along thru res locals
-userController.getStack = async (req, res, next) => {
+userController.getUser = async (req, res, next) => {
   const userId = '646d2c7d94ac2c9a3ded88a8'; //req.cookies.ssid;
-
   //because we'll be using our req.cookie to access users, we can guarantee that the user exists in our database
   //unless someone manually goes into my db and deletes it >.> pls dont.. icant
   const userObj = await User.findById(userId); //change to id once frontend is more fleshed out
 
-  const techArr = userObj.techStack;
-
-  console.log(techArr);
-  res.locals.techArray = techArr;
+  res.locals.user = userObj;
   next();
 };
 

@@ -19,7 +19,7 @@ module.exports = {
       directory: path.resolve(__dirname, '/client'),
     },
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/app/user': 'http://localhost:3000',
     },
   },
   module: {
@@ -33,7 +33,12 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         }
-      }
+      },
+      {
+        test: /\.s?css/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ]
   }
 }
