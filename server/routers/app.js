@@ -16,6 +16,13 @@ router.get('/', sessionController.isLoggedIn, (_req, res) => {
   }
 });
 
+router.get('/logout',
+  sessionController.stopSession,
+  (_req, res) => {
+    res.sendFile(path.resolve(__dirname, '../../client/login.html'));
+  }
+)
+
 router.get('/user',
   userController.getUser,
   (_req, res) => {

@@ -1,0 +1,13 @@
+/*style sheet for login and signup page bc i cant figure out react routers LOL*/
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8e0eb;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

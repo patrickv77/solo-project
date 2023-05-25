@@ -6,11 +6,12 @@ const TechnologyDisplay = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addToLearning();
+    e.target.reset();
   };
 
   return (
     <div id="userInput">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e)=>handleSubmit(e)}>
         <input
           value={newTechnology}
           onChange={(e) => updateTechState(e.target.value)}

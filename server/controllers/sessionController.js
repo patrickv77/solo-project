@@ -7,11 +7,11 @@ const sessionController = {};
 sessionController.isLoggedIn = async (req, res, next) => {
   try{
     const currentSession = await Session.find({cookieId: req.cookies.ssid});
-    if(!currentSession){
-      res.locals.loggedIn = true;
+    if(currentSession === [] || currentSession){
+      res.locals.loggedIn = false;
       next();
     } else {
-      res.locals.loggedIn = false;
+      res.locals.loggedIn = true;
       next();
     }
   } catch(err) {
@@ -48,8 +48,9 @@ sessionController.startSession = async (_req, res, next) => {
 sessionController.stopSession = async (_req, res, next) => {
   //delete session, go next
   try {
-    await Session.delete({});
-    return next();
+    await Session.deleteMany({});
+    res.clearCookie('ssid');
+    res.redirect('/login');
   } catch (err) {
     next({
       log: 'sessionController.stopSession error ' + err,
