@@ -1,6 +1,6 @@
 const cookieController = {};
 
-// test cookies 
+// test cookies
 // cookieController.testCookie = (req, res, next) => {
 //   res.cookie('test', 'i love will sentance');
 //   return next();

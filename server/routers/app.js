@@ -16,31 +16,24 @@ router.get('/', sessionController.isLoggedIn, (_req, res) => {
   }
 });
 
-router.get('/logout',
-  sessionController.stopSession,
-  (_req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../client/login.html'));
-  }
-)
+router.get('/logout', sessionController.stopSession, (_req, res) => {
+  res.writeHead(302, {
+    Location: 'http://localhost:3000/login',
+  });
+  //res.sendFile(path.resolve(__dirname, '../../client/login.html'));
+});
 
-router.get('/user',
-  userController.getUser,
-  (_req, res) => {
-    res.status(200).json(res.locals.user);
-  }
-);
+router.get('/user', userController.getUser, (_req, res) => {
+  res.status(200).json(res.locals.user);
+});
 
-router.patch('/learning',
-  userController.learningHandler,
-  (_req,res) => {
-    res.status(200).json(res.locals.learning);
-  }
-)
+router.patch('/learning', userController.learningHandler, (_req, res) => {
+  res.status(200).json(res.locals.learning);
+});
 
 //handles adding techs to stack
-router.patch('/',
-  userController.addToStack,
-  (_req, res) => res.status(200).json(res.locals.updatedUser)
-)
+router.patch('/', userController.addToStack, (_req, res) =>
+  res.status(200).json(res.locals.updatedUser)
+);
 
 module.exports = router;

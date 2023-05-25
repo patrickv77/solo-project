@@ -10,7 +10,7 @@ body {
   padding: 10px;
   display: grid;
   grid-template-rows: 180px 3fr;
-  background-color: lighten($accentColor,8%);
+  background-color: lighten($accentColor, 8%);
   margin: 0;
 }
 
@@ -18,14 +18,18 @@ body {
   display: grid;
   grid-template-columns: 206px auto 120px;
   margin-bottom: 4px;
-  background-color: lighten($accentColor,10%);
+  background-color: lighten($accentColor, 10%);
   #projectName {
     display: grid;
     grid-template-rows: 60px 60px 60px;
     align-items: center;
     border: 2px solid black;
     border-radius: 3px;
-    background-image: linear-gradient(to bottom right, darken(darkgrey, 15%), darken(darkgrey, 55%));
+    background-image: linear-gradient(
+      to bottom right,
+      darken(darkgrey, 15%),
+      darken(darkgrey, 55%)
+    );
     color: darken(white, 0);
     box-shadow: 3px 3px 3px black;
     #title1 {
@@ -93,9 +97,9 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: darken($bgcolor, 8%);
-    margin-bottom:2px;
+    margin-bottom: 2px;
     box-shadow: 2px 2px 2px $bgcolor;
-    #centeringDiv{
+    #centeringDiv {
       flex-grow: 2;
     }
     #userInput {
@@ -121,7 +125,8 @@ body {
         border-radius: 4px;
         border-width: 0;
         box-shadow: rgba(45, 35, 66, 0.4) 2px 2px 4px,
-          rgba(45, 35, 66, 0.3) 2px 7px 13px 2px, lighten($buttonColor,8%) 2px 2px 2px inset;
+          rgba(45, 35, 66, 0.3) 2px 7px 13px 2px,
+          lighten($buttonColor, 8%) 2px 2px 2px inset;
         color: lightgrey;
         cursor: pointer;
         font-family: 'JetBrains Mono', monospace;
@@ -145,19 +150,18 @@ body {
       background-color: lighten($accentColor, 2%);
       box-shadow: 2px 2px 2px black;
       flex-grow: 1;
-      p{
+      p {
         font-family: 'Source Code Pro', monospace;
       }
-      #learningBox{
+      #learningBox {
         justify-self: center;
         margin-top: 3px;
       }
-      #currTech{
+      #currTech {
         justify-self: center;
         margin-top: 3px;
-        
       }
-      button{
+      button {
         justify-self: center;
         appearance: none;
         border: 1px solid skyblue;
@@ -181,7 +185,7 @@ body {
     background-color: lighten($bgcolor, 2%);
     border-radius: 5px;
     border: 2px solid lightgrey;
-    margin-bottom:2px;
+    margin-bottom: 2px;
     box-shadow: 1px 1px 1px darken($bgcolor, 4%);
     .tech {
       font-family: 'Source Code Pro', monospace;
@@ -199,7 +203,7 @@ body {
     border-radius: 5px;
     display: flex;
     justify-content: center;
-    #owen{
+    #owen {
       transform: scale(0.65, 0.65);
     }
   }

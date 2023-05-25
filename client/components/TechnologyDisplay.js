@@ -11,12 +11,14 @@ const TechnologyDisplay = (props) => {
 
   return (
     <div id="userInput">
-      <form onSubmit={(e)=>handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <input
           value={newTechnology}
           onChange={(e) => updateTechState(e.target.value)}
         />
-        <button id="techButton" type="submit">Create Technology</button>
+        <button id="techButton" type="submit">
+          Create Technology
+        </button>
       </form>
     </div>
   );

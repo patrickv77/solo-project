@@ -5,10 +5,4 @@ import { BrowserRouter } from 'react-router-dom';
 import styles from './scss/application.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <App />
-);
-
-// <BrowserRouter>
-//     <App />
-//   </BrowserRouter>
+root.render(<App />);

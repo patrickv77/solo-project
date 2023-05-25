@@ -70,15 +70,16 @@ class TechContainer extends Component {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then((resp) => resp.json())
-      .then((data) =>
-        this.setState({
-          ...this.state,
-          technology: '',
-          techArray: data.techStack,
-          currLearning: '',
-        })
-      );
+      })
+        .then((resp) => resp.json())
+        .then((data) =>
+          this.setState({
+            ...this.state,
+            technology: '',
+            techArray: data.techStack,
+            currLearning: '',
+          })
+        );
     }
     return;
   }

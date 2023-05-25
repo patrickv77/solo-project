@@ -6,8 +6,11 @@ const TechStackDisplay = (props) => {
   return (
     <div className="displayArea">
       {techArray.map((ele, i) => (
-
-        <TechComponent key={i} tech={ele} randomNumber={Math.floor(Math.random() * (109 - 0) + 0)}/>
+        <TechComponent
+          key={i}
+          tech={ele}
+          randomNumber={Math.floor(Math.random() * (109 - 0) + 0)}
+        />
       ))}
     </div>
   );

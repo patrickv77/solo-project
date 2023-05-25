@@ -1,18 +1,20 @@
 const mongoose = require('mongoose');
 
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
 
-const MONGO_URI = 'mongodb+srv://pat:Uk9B6YKcIzbvQlFF@cluster0.3aacadl.mongodb.net/?retryWrites=true&w=majority'
+const MONGO_URI =
+  'mongodb+srv://pat:Uk9B6YKcIzbvQlFF@cluster0.3aacadl.mongodb.net/?retryWrites=true&w=majority';
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  // sets the name of the DB that our collections are part of
-  dbName: 'techstackprojectPV'
-})
+mongoose
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // sets the name of the DB that our collections are part of
+    dbName: 'techstackprojectPV',
+  })
   .then(() => console.log('Connected to Mongo DB.'))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
@@ -21,9 +23,9 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   learning: { type: String },
   techStack: { type: Array },
-})
+});
 
-userSchema.pre('save', async function (next){
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   //async await method
   try {
@@ -34,12 +36,12 @@ userSchema.pre('save', async function (next){
     next({
       log: 'error in userSchema.pre' + err,
       status: 400,
-      message: 'try again'
+      message: 'try again',
     });
   }
 });
 
-userSchema.methods.validatePassword = async function(pass) {
+userSchema.methods.validatePassword = async function (pass) {
   try {
     return await bcrypt.compare(pass, this.password);
   } catch (err) {

@@ -5,30 +5,30 @@ const sessionController = {};
 
 //runs when everything loads, if session exists, go straight to tech stack page
 sessionController.isLoggedIn = async (req, res, next) => {
-  try{
-    const currentSession = await Session.find({cookieId: req.cookies.ssid});
-    if(currentSession === [] || currentSession){
+  try {
+    const currentSession = await Session.find({ cookieId: req.cookies.ssid });
+    if (currentSession === [] || currentSession) {
       res.locals.loggedIn = false;
       next();
     } else {
       res.locals.loggedIn = true;
       next();
     }
-  } catch(err) {
+  } catch (err) {
     next({
       log: 'error with Session.findOne at sessionController.isLoggedIn',
       status: 400,
-      message: 'could not find session'
-    })
+      message: 'could not find session',
+    });
   }
-} 
+};
 
 //start or restart a session
 sessionController.startSession = async (_req, res, next) => {
   //should only have one session at a time
   try {
     const sesh = await Session.find({});
-    if(sesh){
+    if (sesh) {
       await Session.deleteMany({});
     }
     const newSesh = await Session.create({
@@ -39,7 +39,7 @@ sessionController.startSession = async (_req, res, next) => {
     next({
       log: 'sessionController.startSession error ' + err,
       status: 400,
-      message: 'error! try again.'
+      message: 'error! try again.',
     });
   }
 };
@@ -55,7 +55,7 @@ sessionController.stopSession = async (_req, res, next) => {
     next({
       log: 'sessionController.stopSession error ' + err,
       status: 400,
-      message: 'error! try again.'
+      message: 'error! try again.',
     });
   }
 };

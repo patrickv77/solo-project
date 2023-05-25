@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', sessionController.isLoggedIn, (_req, res) => {
   if (res.locals.loggedIn) {
     //redirect to main page,
-    res.redirect('/')
+    res.redirect('/');
   } else {
     //login page
     res.sendFile(path.resolve(__dirname, '../../client/signup.html'));

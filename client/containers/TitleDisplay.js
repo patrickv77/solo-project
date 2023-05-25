@@ -6,7 +6,7 @@ class TitleDisplay extends Component {
     this.state = {
       user: {},
     };
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -16,7 +16,7 @@ class TitleDisplay extends Component {
   }
 
   async handleClick() {
-    await fetch('/app/logout')
+    await fetch('/app/logout');
   }
 
   render() {
@@ -32,10 +32,14 @@ class TitleDisplay extends Component {
           <p id="title2">STACK</p>
           <p id="title3">visualizer</p>
         </div>
-        <p id="displayName">{this.state.user.firstName} {this.state.user.lastName}'s tech stack</p>
+        <p id="displayName">
+          {this.state.user.firstName} {this.state.user.lastName}'s tech stack
+        </p>
         <div id="userAndLogout">
           <p id="user">{this.state.user.username}</p>
-          <button id="logout" onClick={this.handleClick}>Log Out</button>
+          <button id="logout" onClick={this.handleClick}>
+            Log Out
+          </button>
         </div>
       </div>
     );

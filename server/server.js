@@ -9,6 +9,7 @@ const PORT = 3000;
 const loginRouter = require('./routers/login');
 const signupRouter = require('./routers/signup');
 const appRouter = require('./routers/app');
+const acornRouter = require('./routers/acorn');
 
 //controllers
 const cookieController = require('./controllers/cookieController');
@@ -16,35 +17,22 @@ const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.resolve(__dirname, '../client/public')))
+app.use(express.static(path.resolve(__dirname, '../client/public')));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 //root, serve index html
-app.get('/',
-  sessionController.isLoggedIn,
-  (_req, res) => {
-  console.log(res.locals.loggedIn)
-  if(res.locals.loggedIn){
+app.get('/', sessionController.isLoggedIn, (_req, res) => {
+  console.log(res.locals.loggedIn);
+  if (res.locals.loggedIn) {
     //redirect to main page,
     res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-  }else{
+  } else {
     //login page
     res.sendFile(path.resolve(__dirname, '../client/login.html'));
   }
 });
-
-//fake root that logs in and creates session cookie
-// app.get(
-//   '/',
-//   userController.testUser,
-//   cookieController.setSSIDCookie,
-//   sessionController.startSession,
-//   (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../client/index.html'));
-//   }
-// );
 
 //signup router
 app.use('/signup', signupRouter);
@@ -55,17 +43,19 @@ app.use('/login', loginRouter);
 //main page
 app.use('/app', appRouter);
 
-//TEST ROUTES TO TEST MIDDLEWARE
-app.get('/test', userController.getUser, (req, res) => {
-  res.status(200).json(res.locals.user);
-});
-app.post('/test', userController.addToStack, (req, res) => {
-  res.sendStatus(200);
-});
+app.use('/acorn', acornRouter);
 
-app.patch('/test', userController.learningHandler, (_req, res) => {
-  res.status(200).json(res.locals.learning);
-});
+//TEST ROUTES TO TEST MIDDLEWARE
+// app.get('/test', userController.getUser, (req, res) => {
+//   res.status(200).json(res.locals.user);
+// });
+// app.post('/test', userController.addToStack, (req, res) => {
+//   res.sendStatus(200);
+// });
+
+// app.patch('/test', userController.learningHandler, (_req, res) => {
+//   res.status(200).json(res.locals.learning);
+// });
 
 //catch all for non existant routes
 app.use((_req, res) =>

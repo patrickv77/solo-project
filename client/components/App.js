@@ -15,12 +15,3 @@ const App = () => {
 };
 
 export default App;
-// <Routes>
-//       <Route
-//         path="/"
-//         element={
-
-//           />
-//       <Route path="/loginn" element={<login />} />
-//       <Route path="/signup" element={<signup />} />
-//     </Routes>
