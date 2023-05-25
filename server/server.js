@@ -18,30 +18,33 @@ const userController = require('./controllers/userController');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.use(express.static(path.resolve(__dirname, '../client/public')))
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
 //root, serve index html
-// app.get('/',
-//   sessionController.isLoggedIn,
-//   (_req, res) => {
-//   if(res.locals.isLoggedIn){
-//     //redirect to main page,
-//     res.sendFile(path.resolve(__dirname, '../client/index.html'));
-//   }else{
-//     //login page
-//     res.sendFile(path.resolve(__dirname, '../client/login.html'));
-//   }
-// });
+app.get('/',
+  sessionController.isLoggedIn,
+  (_req, res) => {
+  console.log(res.locals.loggedIn)
+  if(res.locals.loggedIn){
+    //redirect to main page,
+    res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+  }else{
+    //login page
+    res.sendFile(path.resolve(__dirname, '../client/login.html'));
+  }
+});
 
 //fake root that logs in and creates session cookie
-app.get(
-  '/',
-  userController.testUser,
-  cookieController.setSSIDCookie,
-  sessionController.startSession,
-  (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/index.html'));
-  }
-);
+// app.get(
+//   '/',
+//   userController.testUser,
+//   cookieController.setSSIDCookie,
+//   sessionController.startSession,
+//   (req, res) => {
+//     res.sendFile(path.resolve(__dirname, '../client/index.html'));
+//   }
+// );
 
 //signup router
 app.use('/signup', signupRouter);

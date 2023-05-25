@@ -1,13 +1,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>totally not unit 10 authentication</title>
+  <title>unit 10 auth signup done right</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  Signup
-  <form method='POST' action='/signup'>
+  <h1>Signup</h1>
+  <form method='POST' action='/signup' class="form">
+    <input name="firstName" type="text" placeholder="First Name"></input>
+    <input name="lastName" type="text" placeholder="Last Name"></input>
     <input name="username" type="text" placeholder="username"></input>
-    <input name="password" type="password"></input>
+    <input name="password" type="password" placeholder="password"></input>
     <input type="submit" value="create user"></input>
   </form>
 </body>

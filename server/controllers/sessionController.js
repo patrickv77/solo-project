@@ -1,3 +1,4 @@
+const { trusted } = require('mongoose');
 const Session = require('../models/sessionModel');
 
 const sessionController = {};
@@ -5,11 +6,8 @@ const sessionController = {};
 //runs when everything loads, if session exists, go straight to tech stack page
 sessionController.isLoggedIn = async (req, res, next) => {
   try{
-    // const currentSession = await Session.findOne({
-    //   cookieId: req.cookies.ssid,
-    // });
-    const currentSession = false;
-    if(currentSession){
+    const currentSession = await Session.find({cookieId: req.cookies.ssid});
+    if(!currentSession){
       res.locals.loggedIn = true;
       next();
     } else {
@@ -29,8 +27,11 @@ sessionController.isLoggedIn = async (req, res, next) => {
 sessionController.startSession = async (_req, res, next) => {
   //should only have one session at a time
   try {
-    await Session.deleteMany({});
-    const sesh = await Session.create({
+    const sesh = await Session.find({});
+    if(sesh){
+      await Session.deleteMany({});
+    }
+    const newSesh = await Session.create({
       cookieId: res.locals.user.id,
     });
     return next();

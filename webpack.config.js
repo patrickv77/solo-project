@@ -5,8 +5,9 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, '/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -20,7 +21,7 @@ module.exports = {
     },
     proxy: {
       '/app/**': 'http://localhost:3000',
-      '/test': 'http://localhost:3000',
+      '/**': 'http://localhost:3000',
     },
   },
   module: {
