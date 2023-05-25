@@ -61,7 +61,23 @@ class TechContainer extends Component {
   }
 
   addToStack() {
-    //add to stack, fetch req
+    if (this.state.currLearning !== '') {
+      const obj = { technologyToAdd: this.state.currLearning };
+      fetch('/app', {
+        method: 'PATCH',
+        body: JSON.stringify(obj),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((resp) => resp.json())
+      .then((data) =>
+        this.setState({
+          ...this.state,
+          techArray: data.techStack,
+          currLearning: '',
+        })
+      );
+    }
     return;
   }
 
@@ -71,14 +87,12 @@ class TechContainer extends Component {
         <TechnologyCreator
           updateTechState={this.updateTechState}
           addToLearning={this.addToLearning}
+          addToStack={this.addToStack}
           newTechnology={this.state.technology}
           currLearning={this.state.currLearning}
         />
-        <TechStackDisplay
-          techArray={this.state.techArray}
-        />
+        <TechStackDisplay techArray={this.state.techArray} />
         <AcornDisplay />
-        <p>acorn area for trolling idk</p>
       </div>
     );
   }

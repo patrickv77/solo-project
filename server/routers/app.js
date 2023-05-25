@@ -32,7 +32,8 @@ router.patch('/learning',
 
 //handles adding techs to stack
 router.patch('/',
-  (_req, res) => res.status(200).json({})
+  userController.addToStack,
+  (_req, res) => res.status(200).json(res.locals.updatedUser)
 )
 
 module.exports = router;

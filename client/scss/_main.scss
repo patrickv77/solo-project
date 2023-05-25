@@ -1,79 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Palanquin:wght@700&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Palanquin:wght@700&family=Righteous&family=Source+Code+Pro&display=swap');
 
-.main {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: 180px 3fr;
-  background-color: lighten($bgcolor, 3%);
-  border: 1px solid orange;
+body {
+  margin: 0;
 }
 
-.title{
+.main {
+  width: 98vw;
+  height: 98vh;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 180px 3fr;
+  background-color: lighten($accentColor,8%);
+  margin: 0;
+}
+
+.title {
   display: grid;
   grid-template-columns: 206px auto 120px;
-  #projectName{
+  margin-bottom: 4px;
+  background-color: lighten($accentColor,10%);
+  #projectName {
     display: grid;
     grid-template-rows: 60px 60px 60px;
     align-items: center;
-    #title1{
-      font-family: 'Righteous';
+    border: 2px solid black;
+    border-radius: 3px;
+    background-color: darken(darkgrey, 55%);
+    color: darken(white, 0);
+    box-shadow: 3px 3px 3px black;
+    #title1 {
+      font-family: 'Righteous', cursive;
       font-weight: 20;
       font-size: 100px;
       margin-top: 15px;
       margin-bottom: 0;
     }
-    #title2{
-      font-family: 'Palanquin';
+    #title2 {
+      font-family: 'Palanquin', sans-serif;
       font-size: 67px;
       font-weight: 1000;
-      margin-top: 8px;
+      margin-top: 10px;
       margin-bottom: 0;
     }
-    #title3{
-      font-family: 'Dancing Script';
+    #title3 {
+      font-family: 'Dancing Script', cursive;
       font-size: 60px;
-      margin-top: -15px;
+      margin-top: -5px;
       margin-bottom: 0;
     }
   }
-  #displayName{
+  #displayName {
     justify-self: center;
-    align-self: end;
+    align-self: center;
     font-size: 50px;
     margin-bottom: 5px;
+    font-weight: 550;
   }
-  #userAndLogout{
+  #userAndLogout {
     display: flex;
     min-width: 120px;
+    border-radius: 5px;
+    border: 2px black dashed;
+    background-color: darken($bgcolor, 15%);
     align-self: start;
-    border: 1px solid red;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    #user{
+    #user {
       display: inline-block;
       margin-top: 5px;
       margin-bottom: 5px;
     }
-    #logout{
-      
+    #logout {
     }
   }
 }
 
-.data{
-  border: 1px solid red;
-  display: grid;
-  grid-template-rows: 1fr 7fr 1fr;
-  .techCreator{
-    border: 1px solid red;
+.data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+  .techCreator {
+    border: 2px solid darkgrey;
+    border-radius: 5px;
     display: flex;
+    justify-content: space-between;
+    background-color: darken($bgcolor, 8%);
+    margin-bottom:2px;
+    box-shadow: 2px 2px 2px $bgcolor;
+    #centeringDiv{
+      flex-grow: 2;
+    }
+    #userInput {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 6;
+      input {
+        font-family: 'Source Code Pro', monospace;
+        height: 36px;
+        width: 600px;
+        font-size: 32px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: lighten($bgcolor, 7%);
+        transform: translateY(6px) translateX(-10px);
+      }
+      #techButton {
+        appearance: none;
+        background-color: $buttonColor;
+        border-radius: 4px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.4) 2px 2px 4px,
+          rgba(45, 35, 66, 0.3) 2px 7px 13px 2px, lighten($buttonColor,8%) 2px 2px 2px inset;
+        color: lightgrey;
+        cursor: pointer;
+        font-family: 'JetBrains Mono', monospace;
+        height: 36px;
+        padding-left: 16px;
+        padding-right: 16px;
+        transition: box-shadow 0.15s, transform 0.15s;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow, transform;
+        font-size: 18px;
 
-    #currentlyLearning{
-      border: 1px solid red;
+      }
     }
 
-
+    #currentlyLearning {
+      display: grid;
+      grid-template-rows: 3vh 3vh 3vh;
+      border: 1px solid black;
+      border-radius: 5px;
+      justify-items: flex-end;
+      background-color: lighten($accentColor, 2%);
+      box-shadow: 2px 2px 2px black;
+      flex-grow: 1;
+      p{
+        font-family: 'Source Code Pro', monospace;
+      }
+      #learningBox{
+        justify-self: center;
+        margin-top: 3px;
+      }
+      #currTech{
+        justify-self: center;
+        margin-top: 3px;
+        
+      }
+      button{
+        justify-self: center;
+      }
+    }
   }
+  .displayArea {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    flex-grow: 8;
+    gap: 16px;
+    background-color: lighten($bgcolor, 2%);
+    border-radius: 5px;
+    border: 2px solid lightgrey;
+    margin-bottom:2px;
+    box-shadow: 1px 1px 1px darken($bgcolor, 4%);
+    .tech {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 40px;
+      padding: 8px;
+      border: 2px dotted black;
+      box-shadow: 2px 2px 2px black;
+      flex-grow: 0;
+    }
+  }
+  .acorn {
+    background-color: darken($bgcolor, 8%);
+    box-shadow: 2px 2px 2px black;
+    border: 2px solid darkgrey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+#techButton:focus {
+  box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+}
+
+#techButton:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+#techButton:active {
+  box-shadow: #d6d6e7 0 3px 7px inset;
+  transform: translateY(2px);
 }

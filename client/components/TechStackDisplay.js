@@ -5,12 +5,9 @@ const TechStackDisplay = (props) => {
   const { techArray } = props;
 
   return (
-    <div>
-      {techArray.map((ele,i) => (
-        <TechComponent 
-          key={i}
-          tech={ele}
-        />
+    <div className="displayArea">
+      {techArray.map((ele, i) => (
+        <TechComponent key={i} tech={ele} />
       ))}
     </div>
   );

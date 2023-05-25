@@ -58,11 +58,11 @@ userController.verifyUser = async (req, res, next) => {
 userController.learningHandler = async (req, res, next) => {
   console.log(req.body);
   const { currLearning } = req.body;
-  const userId = '646d2c7d94ac2c9a3ded88a8'
+  const userId = '646d2c7d94ac2c9a3ded88a8';
   const userObj = await User.findById(userId);
-  if(userObj.learning === ''){
-    await User.findByIdAndUpdate(userId, {learning: currLearning});
-  }else{
+  if (userObj.learning === '') {
+    await User.findByIdAndUpdate(userId, { learning: currLearning });
+  } else {
     currLearning = userObj.learning;
   }
   console.log(currLearning);
@@ -92,13 +92,21 @@ userController.addToStack = async (req, res, next) => {
     });
   }
 
-  await User.findByIdAndUpdate(userId, {
-    $push: { techStack: technologyToAdd },
-  });
+  const updated = await User.findByIdAndUpdate(
+    userId,
+    {
+      $set: { learning: '' },
+      $push: { techStack: technologyToAdd },
+    },
+    {
+      new: true,
+    }
+  );
 
   // const userObj = await User.findById(userId);
   // console.log(userObj.techStack);
   // console.log(techArr);
+  res.locals.updatedUser = updated;
   next();
 };
 
