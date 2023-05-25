@@ -115,13 +115,13 @@ const colors = [
 ];
 
 const TechComponent = (props) => {
-  const { tech } = props;
+  const { tech, randomNumber } = props;
 
   return (
     <div
       className="tech"
       style={{
-        backgroundColor: colors[Math.floor(Math.random() * (109 - 0) + 0)],
+        backgroundColor: colors[randomNumber],
       }}
     >
       {tech}

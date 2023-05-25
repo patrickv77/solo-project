@@ -41,7 +41,6 @@ class TechContainer extends Component {
   }
 
   addToLearning() {
-    console.log(this.state)
     if (this.state.currLearning === '') {
       const obj = { currLearning: this.state.technology };
       fetch('/app/learning', {
@@ -75,6 +74,7 @@ class TechContainer extends Component {
       .then((data) =>
         this.setState({
           ...this.state,
+          technology: '',
           techArray: data.techStack,
           currLearning: '',
         })

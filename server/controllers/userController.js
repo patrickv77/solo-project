@@ -59,18 +59,14 @@ userController.verifyUser = async (req, res, next) => {
 };
 
 userController.learningHandler = async (req, res, next) => {
-  //console.log(req.body);
-  console.log('in learning handler');
-  const { currLearning } = req.body;
+  let { currLearning } = req.body;
   const userId = req.cookies.ssid; //'646d2c7d94ac2c9a3ded88a8'
   const userObj = await User.findById(userId);
-  console.log('userObj in learningHandler ', userObj);
   if (userObj.learning === '') {
     await User.findByIdAndUpdate(userId, { learning: currLearning });
   } else {
-    currLearning = userObj.learning;
+    currLearning = '';
   }
-  console.log('currLearning ', currLearning);
   res.locals.learning = currLearning;
   next();
 };
@@ -97,22 +93,28 @@ userController.addToStack = async (req, res, next) => {
     });
   }
 
-  const updated = await User.findByIdAndUpdate(
-    userId,
-    {
-      $set: { learning: '' },
-      $push: { techStack: technologyToAdd },
-    },
-    {
-      new: true,
-    }
-  );
-
-  // const userObj = await User.findById(userId);
-  // console.log(userObj.techStack);
-  // console.log(techArr);
-  res.locals.updatedUser = updated;
-  next();
+  const checkUser = await User.findById(userId);
+  if (checkUser.techStack.includes(technologyToAdd)) {
+    //if user has that tech in stack, return old user without adding tech to stack
+    const alreadyLearnedUser = await User.findByIdAndUpdate(userId, {
+      learning: '',
+    });
+    res.locals.updatedUser = alreadyLearnedUser;
+    next();
+  } else {
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      {
+        $set: { learning: '' },
+        $push: { techStack: technologyToAdd },
+      },
+      {
+        new: true,
+      }
+    );
+    res.locals.updatedUser = updated;
+    next();
+  }
 };
 
 //TODO: REMOVE TECHNOLOGY?

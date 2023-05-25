@@ -25,7 +25,7 @@ body {
     align-items: center;
     border: 2px solid black;
     border-radius: 3px;
-    background-color: darken(darkgrey, 55%);
+    background-image: linear-gradient(to bottom right, darken(darkgrey, 15%), darken(darkgrey, 55%));
     color: darken(white, 0);
     box-shadow: 3px 3px 3px black;
     #title1 {
@@ -72,7 +72,13 @@ body {
       margin-bottom: 5px;
     }
     #logout {
-      color: black;
+      appearance: none;
+      border: 1px solid skyblue;
+      border-radius: 5px;
+      color: skyblue;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      background-color: lighten(lightgrey, 9%);
     }
   }
 }
@@ -102,7 +108,8 @@ body {
         font-family: 'Source Code Pro', monospace;
         height: 36px;
         width: 600px;
-        font-size: 32px;
+        font-size: 28px;
+        text-align: right;
         border: 1px solid black;
         border-radius: 5px;
         background-color: lighten($bgcolor, 7%);
@@ -152,6 +159,14 @@ body {
       }
       button{
         justify-self: center;
+        appearance: none;
+        border: 1px solid skyblue;
+        color: skyblue;
+        background-color: lighten(lightgrey, 9%);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        font-size: 20px;
+        border-radius: 5px;
       }
     }
   }
@@ -161,7 +176,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
-    flex-grow: 8;
+    flex-grow: 9;
     gap: 16px;
     background-color: lighten($bgcolor, 2%);
     border-radius: 5px;
@@ -184,6 +199,9 @@ body {
     border-radius: 5px;
     display: flex;
     justify-content: center;
+    #owen{
+      transform: scale(0.65, 0.65);
+    }
   }
 }
 
