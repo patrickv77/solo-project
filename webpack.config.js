@@ -19,7 +19,8 @@ module.exports = {
       directory: path.resolve(__dirname, '/client'),
     },
     proxy: {
-      '/app/user': 'http://localhost:3000',
+      '/app/**': 'http://localhost:3000',
+      '/test': 'http://localhost:3000',
     },
   },
   module: {

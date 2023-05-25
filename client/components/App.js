@@ -4,7 +4,7 @@ import TechContainer from '../containers/TechContainer';
 
 const App = () => {
   return (
-    <div class='main'>
+    <div className='main'>
       <TitleDisplay />
       <TechContainer />
     </div>

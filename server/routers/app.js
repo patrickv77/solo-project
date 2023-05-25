@@ -23,6 +23,13 @@ router.get('/user',
   }
 );
 
+router.patch('/learning',
+  userController.learningHandler,
+  (_req,res) => {
+    res.status(200).json(res.locals.learning);
+  }
+)
+
 //handles adding techs to stack
 router.patch('/',
   (_req, res) => res.status(200).json({})

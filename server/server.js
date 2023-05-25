@@ -16,7 +16,7 @@ const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 //root, serve index html
@@ -24,7 +24,7 @@ app.use(cookieParser());
 //   sessionController.isLoggedIn,
 //   (_req, res) => {
 //   if(res.locals.isLoggedIn){
-//     //redirect to main page, 
+//     //redirect to main page,
 //     res.sendFile(path.resolve(__dirname, '../client/index.html'));
 //   }else{
 //     //login page
@@ -33,7 +33,8 @@ app.use(cookieParser());
 // });
 
 //fake root that logs in and creates session cookie
-app.get('/',
+app.get(
+  '/',
   userController.testUser,
   cookieController.setSSIDCookie,
   sessionController.startSession,
@@ -52,18 +53,16 @@ app.use('/login', loginRouter);
 app.use('/app', appRouter);
 
 //TEST ROUTES TO TEST MIDDLEWARE
-app.get('/test', 
-  userController.getUser,
-  (req, res) => {
-    res.status(200).send(res.locals.user);
-  }
-)
-app.post('/test', 
-  userController.addToStack,
-  (req, res) => {
-    res.sendStatus(200)
-  }
-)
+app.get('/test', userController.getUser, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
+app.post('/test', userController.addToStack, (req, res) => {
+  res.sendStatus(200);
+});
+
+app.patch('/test', userController.learningHandler, (_req, res) => {
+  res.status(200).json(res.locals.learning);
+});
 
 //catch all for non existant routes
 app.use((_req, res) =>

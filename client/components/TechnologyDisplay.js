@@ -1,9 +1,23 @@
 import React from 'react';
 
 const TechnologyDisplay = (props) => {
+  const { addToLearning, updateTechState, newTechnology} = props;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addToLearning();
+  }
+
   return(
     <div>
-      <p>user input, button in line to create a technology and add to stack. stretch goal drag and drop elements</p>
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder='input technology name here'
+          value={newTechnology}
+          onChange={(e) => updateTechState(e.target.value)}
+        />
+        <button type='submit'>Create Technology</button>
+      </form>
     </div>
   )
 }

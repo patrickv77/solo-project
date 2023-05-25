@@ -2,9 +2,10 @@ import React from 'react';
 
 const LearningDisplay = (props) => {
   return (
-    <div>
-      <p>currently learning! (insert prop below)</p>
-      <p>button to add to stack</p>
+    <div id="currentlyLearning">
+      <p>Currently Learning</p>
+      <p>{props.currLearning}</p>
+      <button>Add To Stack</button>
     </div>
   )
 }

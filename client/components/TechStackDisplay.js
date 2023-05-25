@@ -1,12 +1,19 @@
 import React from 'react';
+import TechComponent from './TechComponent';
 
 const TechStackDisplay = (props) => {
-  
+  const { techArray } = props;
+
   return (
     <div>
-      <p>pass tech stack to here and unpack</p>
+      {techArray.map((ele,i) => (
+        <TechComponent 
+          key={i}
+          tech={ele}
+        />
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default TechStackDisplay;

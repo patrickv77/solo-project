@@ -55,9 +55,24 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+userController.learningHandler = async (req, res, next) => {
+  console.log(req.body);
+  const { currLearning } = req.body;
+  const userId = '646d2c7d94ac2c9a3ded88a8'
+  const userObj = await User.findById(userId);
+  if(userObj.learning === ''){
+    await User.findByIdAndUpdate(userId, {learning: currLearning});
+  }else{
+    currLearning = userObj.learning;
+  }
+  console.log(currLearning);
+  res.locals.learning = currLearning;
+  next();
+};
+
 //get stack and pass along thru res locals
 userController.getUser = async (req, res, next) => {
-  const userId = '646d2c7d94ac2c9a3ded88a8'; //req.cookies.ssid;
+  const userId = '646d2c7d94ac2c9a3ded88a8'; //'646d2c7d94ac2c9a3ded88a8';
   //because we'll be using our req.cookie to access users, we can guarantee that the user exists in our database
   //unless someone manually goes into my db and deletes it >.> pls dont.. icant
   const userObj = await User.findById(userId); //change to id once frontend is more fleshed out
@@ -76,7 +91,6 @@ userController.addToStack = async (req, res, next) => {
       message: 'invalid type of input',
     });
   }
-
 
   await User.findByIdAndUpdate(userId, {
     $push: { techStack: technologyToAdd },
